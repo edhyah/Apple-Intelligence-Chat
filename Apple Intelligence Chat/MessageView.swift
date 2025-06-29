@@ -1,10 +1,3 @@
-//
-//  MessageView.swift
-//  Apple Intelligence Chat
-//
-//  Created by Pallav Agarwal on 6/9/25.
-//
-
 import SwiftUI
 
 /// Represents the role of a chat participant
@@ -35,8 +28,10 @@ struct MessageView: View {
                     .foregroundColor(.white)
                     .background(.blue)
                     .clipShape(.rect(cornerRadius: 18))
+#if !os(visionOS)
                     .glassEffect(in: .rect(cornerRadius: 18))
-                
+#endif
+
             } else {
                 VStack(alignment: .leading, spacing: 4) {
                     if message.text.isEmpty && isResponding {

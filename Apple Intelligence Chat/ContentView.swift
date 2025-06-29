@@ -1,10 +1,3 @@
-//
-//  ContentView.swift
-//  Apple Intelligence Chat
-//
-//  Created by Pallav Agarwal on 6/9/25.
-//
-
 import SwiftUI
 import FoundationModels
 
@@ -48,13 +41,16 @@ struct ContentView: View {
                             }
                         }
                         .padding()
-                        .padding(.bottom, 90) // Space for floating input field
+                        .padding(.bottom, 70) // Space for floating input field
+
+                        // Invisible anchor
+                        Color.clear
+                            .frame(height: 1)
+                            .id("bottom")
                     }
                     .onChange(of: messages.last?.text) {
-                        if let lastMessage = messages.last {
-                            withAnimation {
-                                proxy.scrollTo(lastMessage.id, anchor: .bottom)
-                            }
+                        withAnimation {
+                            proxy.scrollTo("bottom", anchor: .bottom)
                         }
                     }
                 }
@@ -108,14 +104,19 @@ struct ContentView: View {
                         .font(.system(size: 30, weight: .bold))
                         .foregroundStyle(isSendButtonDisabled ? Color.gray.opacity(0.6) : .primary)
                 }
+                .buttonStyle(.plain)
                 .disabled(isSendButtonDisabled)
                 .animation(.easeInOut(duration: 0.2), value: isResponding)
                 .animation(.easeInOut(duration: 0.2), value: isSendButtonDisabled)
+#if !os(visionOS)
                 .glassEffect(.regular.interactive())
+#endif
                 .padding(.trailing, 8)
             }
         }
+#if !os(visionOS)
         .glassEffect(.regular.interactive())
+#endif
     }
     
     private var isSendButtonDisabled: Bool {

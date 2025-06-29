@@ -1,10 +1,3 @@
-//
-//  SettingsView.swift
-//  Apple Intelligence Chat
-//
-//  Created by Pallav Agarwal on 6/9/25.
-//
-
 import SwiftUI
 
 /// App-wide settings stored in UserDefaults
